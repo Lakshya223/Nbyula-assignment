@@ -2,6 +2,9 @@ import React, {useEffect, useState} from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import {validateLogin} from "../components/Validation";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../state/index";
 
 
 
@@ -10,9 +13,11 @@ export const Login =(props)=>{
     const navigate = useNavigate();
     
     const [email, setEmail] = useState('');
-    const [pass ,setPass] = useState('');
+    const [pass ,setPass1] = useState('');
     const [errors,setError] = useState({})
-   
+    const dispatch= useDispatch();
+    const { setUser,setPass}=bindActionCreators(actionCreators,dispatch);
+     
   
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -40,7 +45,8 @@ export const Login =(props)=>{
          //set user state respons.data.name
                
                
-             
+              setUser(response.data.name)
+              setPass(pass)
                 navigate("/Home") ;
             }
             
@@ -59,7 +65,7 @@ export const Login =(props)=>{
             {errors.name && <p style={{color:"red"}}>{errors.name}</p>}
             
             <label htmlFor ="password">password</label>
-            <input value = {pass} onChange = {(e)=> setPass(e.target.value)} type = "password" placeholder="******" id ="password" name="password" />
+            <input value = {pass} onChange = {(e)=> setPass1(e.target.value)} type = "password" placeholder="******" id ="password" name="password" />
             {errors.pass && <p  style={{color:"red"}}>{errors.pass}</p>}
             {errors.checkUser && <p  style={{color:"red"}}>{errors.checkUser}</p>}
             {errors.checkPass && <p >{errors.checkPass}</p>}

@@ -2,15 +2,17 @@ import { useState } from "react";
 import { MenuData } from "./MenuData";
 import "../styles/NavbarStyles.css"
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 function Navbar() {
   const [clicked, setClicked] = useState(false);
+  const user = useSelector(state=> state.user)
  
  
   // Create a new object with the additional structure
   const newMenuItem = {
-    title: "user",
+    title: user,
     url: "/Profile",
     cName: "nav-links",
     icon: "fa-solid fa-user"
