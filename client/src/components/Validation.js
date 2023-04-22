@@ -30,3 +30,37 @@ export const validateRegister = (name, email,pass,cPass) => {
     return errors;
 }
 
+export const validateChangePassword = (pass,currPass, newPass, cNewPass)=>{
+    let errors={}
+    if(pass!==currPass)
+    {
+        errors.currPassCheck= "incorrect current password"
+    }
+   
+    console.log(pass,currPass,cNewPass)
+
+    if(newPass!==cNewPass)
+    {
+        errors.mismatch= "password mismatch"
+    }
+    return errors
+    
+}
+
+export const validateChangeUser = (name,currName,newName,cNewName )=>{
+    let errors={}
+    if(name!==currName)
+    {
+        errors.currNameCheck= "incorrect current username"
+    }
+   
+    console.log(name,currName,cNewName)
+
+    if(newName!==cNewName)
+    {
+        errors.mismatch= " username mismatch"
+    }
+    return errors
+    
+}
+

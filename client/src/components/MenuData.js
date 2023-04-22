@@ -6,8 +6,8 @@ export const MenuData = [
         icon : "fa-solid fa-house-user "
     },
     {
-        title : "Inventory",
-        url : "/Home/Inventory",
+        title : "Appointments",
+        url : "/Home/Appointments",
         cName : "nav-links",
         icon : "fa-solid fa-address-book"
     },{
