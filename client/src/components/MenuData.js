@@ -10,11 +10,6 @@ export const MenuData = [
         url : "/Home/Appointments",
         cName : "nav-links",
         icon : "fa-solid fa-address-book"
-    },{
-        title : "Third-party",
-        url : "/Home/Third-party",
-        cName : "nav-links",
-        icon : "fa-solid fa-user-group "
     },
    
 ]

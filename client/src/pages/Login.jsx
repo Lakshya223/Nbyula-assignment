@@ -12,11 +12,11 @@ import { actionCreators } from "../state/index";
 export const Login =(props)=>{
     const navigate = useNavigate();
     
-    const [email, setEmail] = useState('');
+    const [email, setEmail1] = useState('');
     const [pass ,setPass1] = useState('');
     const [errors,setError] = useState({})
     const dispatch= useDispatch();
-    const { setUser,setPass}=bindActionCreators(actionCreators,dispatch);
+    const { setUser,setPass,setEmail}=bindActionCreators(actionCreators,dispatch);
      
   
     const handleSubmit = (e) => {
@@ -46,7 +46,8 @@ export const Login =(props)=>{
                
                
               setUser(response.data.name)
-              setPass(pass)
+              setPass(pass);
+              setEmail(email);
                 navigate("/Home") ;
             }
             
@@ -61,7 +62,7 @@ export const Login =(props)=>{
             <h2>Login</h2>
         <form className="login-form" onSubmit={handleSubmit}>
             <label htmlFor ="email">email</label>
-            <input value = {email} onChange={(e)=>setEmail(e.target.value)} type  = "email" placeholder="email@gmail.com" id ="email" name="email" />
+            <input value = {email} onChange={(e)=>setEmail1(e.target.value)} type  = "email" placeholder="email@gmail.com" id ="email" name="email" />
             {errors.name && <p style={{color:"red"}}>{errors.name}</p>}
             
             <label htmlFor ="password">password</label>

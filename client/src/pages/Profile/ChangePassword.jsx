@@ -6,13 +6,15 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../state/index";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
 
 const ChangePassword = () => {
     const[currPass,setCurrPass]= useState('');
     const[newPass,setNewPass]= useState('');
     const[cNewPass,setCNewPass]= useState('');
     const [errors,setError] = useState({});
-    const pass = useSelector(state=> state.pass)
+    const pass = useSelector(state=> state.pass);
+    const email = useSelector(state=> state.email);
     const dispatch= useDispatch();
     const { setUser,setPass}=bindActionCreators(actionCreators,dispatch);
     const navigate = useNavigate();
@@ -30,12 +32,20 @@ const ChangePassword = () => {
 useEffect(()=>{
         
   if(Object.keys(errors).length ===0 && currPass!=="" && pass!=="" && newPass!=="" && cNewPass!==""){
-      //axios update
-    setPass(newPass);
-    if(pass===newPass)
-      alert("password changed successfully")
-      navigate("/Profile")
+    const body = {
+      email : email,
+      pass : newPass
+    }
+    axios.post('http://localhost:3001/updatePassword',body).then( function(response){
+      setPass(newPass)
+      if(pass===newPass){
+        console.log("reached if ")
+        alert("password changed successfully")
+        navigate("/Profile")}
       
+      }
+    );   
+   
   }
 },[errors])
 

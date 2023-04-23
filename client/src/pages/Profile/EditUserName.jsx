@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../state/index";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
 
 const EditUserName = () => {
     const[currName,setCurrName]= useState('');
@@ -16,6 +17,7 @@ const EditUserName = () => {
     const dispatch= useDispatch();
     const { setUser,setPass}=bindActionCreators(actionCreators,dispatch);
     const navigate = useNavigate();
+    const email = useSelector(state=> state.email);
      
 
     const handleSubmit = (e) => {
@@ -31,11 +33,20 @@ useEffect(()=>{
         
   if(Object.keys(errors).length ===0 && currName!=="" && name!=="" && newName!=="" && cNewName!==""){
       //axios update
-    setUser(newName);
-    if(name===newName)
-      alert("username changed successfully")
-      navigate("/Profile")
-      
+
+      const body = {
+        email : email,
+        name : newName
+      }
+      axios.post('http://localhost:3001/updateUserName',body).then( function(response){
+        setUser(newName);
+        if(name===newName){
+          
+          alert("username changed successfully")
+      navigate("/Profile")}
+        
+        }
+      );        
   }
 },[errors])
 

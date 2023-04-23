@@ -17,3 +17,23 @@ export const setPass = (pass)=>{
         
     }
 }
+
+export const setEmail = (email)=>{
+    console.log("reached set email")
+    return(dispatch)=>{
+        dispatch({
+            type:'set_email',
+            payload : email
+        })
+    }
+}
+export const setOff = (off)=>{
+    console.log("reached set email")
+    return(dispatch)=>{
+        dispatch({
+            type:'set_off',
+            payload : off
+        })
+    }
+}
+
